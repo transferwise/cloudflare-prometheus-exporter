@@ -2,7 +2,7 @@ pip==21.1.1
 bumpversion==0.6.0
 wheel==0.36.2
 flake8==3.9.2
-tox==2.9.1
+tox==3.24.1
 coverage==5.5
 twine==3.4.2
 
