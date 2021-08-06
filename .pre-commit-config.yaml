@@ -1,0 +1,22 @@
+# This is not working,
+repos:
+- repo: https://github.com/psf/black
+  rev: 20.8b1 # Replace by any tag/version: https://github.com/psf/black/tags
+  hooks:
+  - id: black
+    language_version: python3
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+    - id: check-ast
+    - id: fix-encoding-pragma
+    - id: check-json
+    - id: check-toml
+    - id: check-yaml
+    - id: pretty-format-json
+      args: ['--autofix']
+    - id: end-of-file-fixer
+    - id: check-merge-conflict
+    - id: check-docstring-first
+    - id: fix-byte-order-marker
+    - id: trailing-whitespace

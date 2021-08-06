@@ -1,0 +1,27 @@
+groups:
+- name: cloudflare.alerts
+  rules:
+  - alert: CloudflareResponse5XXRate
+    annotations:
+      dashboard: |
+        https://127.0.0.1/d/zG50DBQWk/cloudflare?orgId=1
+      description: |
+        [{{ $labels.zone }}][{{ $labels.status_code }}] High server side error rate for past 10m
+      runbook_url: |
+        https://127.0.0.1/Cloudflare+Runbook#CloudflareResponse5XXRate
+    expr: "rate(cloudflare_responses{\n  status_code=~\"5.*\",\n  \n}[10m]) > 1\n"
+    for: 0s
+    labels:
+      severity: critical
+  - alert: PrometheusExporterErrors
+    annotations:
+      dashboard: |
+        https://127.0.0.1/d/zG50DBQWk/cloudflare?orgId=1
+      description: |
+        [{{ $labels.zone }}] Metric collection errors during last 60m.
+      runbook_url: |
+        https://127.0.0.1/Cloudflare+Runbook#PrometheusExporterErrors
+    expr: "rate(prometheus_exporter_metric_collection_errors_total{\n  \n}[60m]) > 0\n"
+    for: 0s
+    labels:
+      severity: warning

@@ -1,0 +1,15 @@
+{
+  "data": null,
+  "errors": [
+    {
+      "extensions": {
+        "timestamp": "2020-02-23T18:41:48.514857487Z"
+      },
+      "message": "not authorized for that account",
+      "path": [
+        "viewer",
+        "accounts"
+      ]
+    }
+  ]
+}

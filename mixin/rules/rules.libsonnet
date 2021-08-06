@@ -1,0 +1,6 @@
+{
+  local cloudflare = self,
+  prometheusRules+:: {
+
+  },
+}

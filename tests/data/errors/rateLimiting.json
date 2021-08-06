@@ -1,0 +1,13 @@
+{
+  "data": null,
+  "errors": [
+    {
+      "extensions": {
+        "code": "budget",
+        "timestamp": "2021-01-06T14:22:33.76733579Z"
+      },
+      "message": "rate limiter budget depleted, please try again later",
+      "path": null
+    }
+  ]
+}

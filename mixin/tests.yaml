@@ -1,0 +1,30 @@
+rule_files:
+  - compiled/compiled_production.yml
+evaluation_interval: 1m
+tests:
+- interval: 1m
+  input_series:
+  - series: 'cloudflare_responses{job="prometheus-exporter-cloudflare", namespace="monitoring", status_code="501", zone="transferwise.com"}'
+    values: '1024+1024x8'
+  alert_rule_test:
+  - eval_time: 8m
+    alertname: CloudflareResponse5XXRate
+    exp_alerts:
+    - exp_labels:
+        job: prometheus-exporter-cloudflare
+        namespace: monitoring
+        status_code: "501"
+        zone: transferwise.com
+        severity: warning
+        dev_mode: true
+        foo: bar
+      exp_annotations:
+        tier: "4"
+        slack_channel: "observability-events"
+        victorops_key: "observability"
+        dashboard:  |
+          https://127.0.0.1/d/12bda154-05a7-4939-b124-5b692f290866/cloudflare?orgId=1
+        runbook_url: |
+          https://127.0.0.1/Cloudflare+Runbook#CloudflareResponse5XXRate
+        description: |
+          [transferwise.com][501] High server side error rate for past 10m

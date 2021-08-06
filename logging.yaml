@@ -1,0 +1,24 @@
+---
+version: 1
+formatters:
+  json:
+    class: pythonjsonlogger.jsonlogger.JsonFormatter
+  wise:
+    class: cloudflare_exporter.logging.CustomJsonFormatter
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: wise
+    stream: ext://sys.stdout
+disable_existing_loggers: false
+loggers:
+  stdout:
+    level: DEBUG
+    handlers: [console]
+    propagate: false
+    formatter: wise
+    stream: ext://sys.stdout
+root:
+  level: DEBUG
+  handlers: [console]

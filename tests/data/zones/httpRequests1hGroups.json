@@ -1,0 +1,172 @@
+{
+  "data": {
+    "viewer": {
+      "zones": [
+        {
+          "httpRequests1hGroups": [
+            {
+              "dimensions": {
+                "datetime": "2020-02-22T20:00:00Z"
+              },
+              "sum": {
+                "browserMap": [],
+                "bytes": 501,
+                "cachedBytes": 0,
+                "cachedRequests": 0,
+                "clientHTTPVersionMap": [
+                  {
+                    "clientHTTPProtocol": "HTTP/1.1",
+                    "requests": 1
+                  }
+                ],
+                "contentTypeMap": [
+                  {
+                    "bytes": 501,
+                    "edgeResponseContentTypeName": "html",
+                    "requests": 1
+                  }
+                ],
+                "countryMap": [
+                  {
+                    "bytes": 501,
+                    "clientCountryName": "DE",
+                    "requests": 1,
+                    "threats": 0
+                  }
+                ],
+                "encryptedBytes": 501,
+                "encryptedRequests": 1,
+                "ipClassMap": [
+                  {
+                    "ipType": "unknown",
+                    "requests": 1
+                  }
+                ],
+                "pageViews": 0,
+                "requests": 1,
+                "responseStatusMap": [
+                  {
+                    "edgeResponseStatus": 530,
+                    "requests": 1
+                  }
+                ],
+                "threatPathingMap": [],
+                "threats": 0
+              },
+              "uniq": {
+                "uniques": 1
+              }
+            },
+            {
+              "dimensions": {
+                "datetime": "2020-02-22T16:00:00Z"
+              },
+              "sum": {
+                "browserMap": [],
+                "bytes": 501,
+                "cachedBytes": 0,
+                "cachedRequests": 0,
+                "clientHTTPVersionMap": [
+                  {
+                    "clientHTTPProtocol": "HTTP/1.1",
+                    "requests": 1
+                  }
+                ],
+                "contentTypeMap": [
+                  {
+                    "bytes": 501,
+                    "edgeResponseContentTypeName": "html",
+                    "requests": 1
+                  }
+                ],
+                "countryMap": [
+                  {
+                    "bytes": 501,
+                    "clientCountryName": "DE",
+                    "requests": 1,
+                    "threats": 0
+                  }
+                ],
+                "encryptedBytes": 501,
+                "encryptedRequests": 1,
+                "ipClassMap": [
+                  {
+                    "ipType": "unknown",
+                    "requests": 1
+                  }
+                ],
+                "pageViews": 0,
+                "requests": 1,
+                "responseStatusMap": [
+                  {
+                    "edgeResponseStatus": 530,
+                    "requests": 1
+                  }
+                ],
+                "threatPathingMap": [],
+                "threats": 0
+              },
+              "uniq": {
+                "uniques": 1
+              }
+            },
+            {
+              "dimensions": {
+                "datetime": "2020-02-23T02:00:00Z"
+              },
+              "sum": {
+                "browserMap": [],
+                "bytes": 501,
+                "cachedBytes": 0,
+                "cachedRequests": 0,
+                "clientHTTPVersionMap": [
+                  {
+                    "clientHTTPProtocol": "HTTP/1.1",
+                    "requests": 1
+                  }
+                ],
+                "contentTypeMap": [
+                  {
+                    "bytes": 501,
+                    "edgeResponseContentTypeName": "html",
+                    "requests": 1
+                  }
+                ],
+                "countryMap": [
+                  {
+                    "bytes": 501,
+                    "clientCountryName": "DE",
+                    "requests": 1,
+                    "threats": 0
+                  }
+                ],
+                "encryptedBytes": 501,
+                "encryptedRequests": 1,
+                "ipClassMap": [
+                  {
+                    "ipType": "unknown",
+                    "requests": 1
+                  }
+                ],
+                "pageViews": 0,
+                "requests": 1,
+                "responseStatusMap": [
+                  {
+                    "edgeResponseStatus": 530,
+                    "requests": 1
+                  }
+                ],
+                "threatPathingMap": [],
+                "threats": 0
+              },
+              "uniq": {
+                "uniques": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "errors": null
+}

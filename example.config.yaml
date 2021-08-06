@@ -1,0 +1,21 @@
+---
+# Global values
+api: httpRequests1hGroups
+scrape_shift_seconds: 3600
+timerange_seconds: 86400
+zones:
+  foobar.ee:
+    zone_id: avaiableInCFConsole
+    # Global values for the zone, overwrite global values
+    timerange_seconds: 3600
+    scrape_shift_seconds: 120
+    scrape_interval_seconds: 3600
+    #api: httpRequests1hGroups
+    #httpRequests1hGroups:
+    #  timerange_seconds: 86400
+    #  scrape_interval_seconds: 3600
+  barbaz.com:
+    zone_id: avaiableInCFConsole
+    timerange_seconds: 86400
+    scrape_interval_seconds: 86400
+accounts: {}

@@ -1,0 +1,458 @@
+{
+  "data": {
+    "viewer": {
+      "accounts": [
+        {
+          "httpRequests1hGroups": [
+            {
+              "dimensions": {
+                "datetime": "2020-02-16T20:00:00Z"
+              },
+              "sum": {
+                "browserMap": [
+                  {
+                    "pageViews": 1,
+                    "uaBrowserFamily": "Chrome"
+                  },
+                  {
+                    "pageViews": 1,
+                    "uaBrowserFamily": "GoogleBot"
+                  }
+                ],
+                "bytes": 75613,
+                "cachedBytes": 57386,
+                "cachedRequests": 1,
+                "clientHTTPVersionMap": [
+                  {
+                    "clientHTTPProtocol": "HTTP/1.0",
+                    "requests": 7
+                  },
+                  {
+                    "clientHTTPProtocol": "HTTP/1.1",
+                    "requests": 5
+                  }
+                ],
+                "contentTypeMap": [
+                  {
+                    "bytes": 2007,
+                    "edgeResponseContentTypeName": "atom",
+                    "requests": 1
+                  },
+                  {
+                    "bytes": 73606,
+                    "edgeResponseContentTypeName": "html",
+                    "requests": 11
+                  }
+                ],
+                "countryMap": [
+                  {
+                    "bytes": 13105,
+                    "clientCountryName": "RU",
+                    "requests": 6,
+                    "threats": 0
+                  },
+                  {
+                    "bytes": 5122,
+                    "clientCountryName": "US",
+                    "requests": 5,
+                    "threats": 0
+                  },
+                  {
+                    "bytes": 57386,
+                    "clientCountryName": "T1",
+                    "requests": 1,
+                    "threats": 0
+                  }
+                ],
+                "encryptedBytes": 16248,
+                "encryptedRequests": 8,
+                "ipClassMap": [
+                  {
+                    "ipType": "searchEngine",
+                    "requests": 5
+                  },
+                  {
+                    "ipType": "noRecord",
+                    "requests": 6
+                  },
+                  {
+                    "ipType": "tor",
+                    "requests": 1
+                  }
+                ],
+                "pageViews": 2,
+                "requests": 12,
+                "responseStatusMap": [
+                  {
+                    "edgeResponseStatus": 200,
+                    "requests": 3
+                  },
+                  {
+                    "edgeResponseStatus": 301,
+                    "requests": 4
+                  },
+                  {
+                    "edgeResponseStatus": 403,
+                    "requests": 1
+                  },
+                  {
+                    "edgeResponseStatus": 404,
+                    "requests": 4
+                  }
+                ],
+                "threatPathingMap": [],
+                "threats": 0
+              },
+              "uniq": {
+                "uniques": 6
+              }
+            },
+            {
+              "dimensions": {
+                "datetime": "2020-02-16T19:00:00Z"
+              },
+              "sum": {
+                "browserMap": [],
+                "bytes": 3790,
+                "cachedBytes": 0,
+                "cachedRequests": 0,
+                "clientHTTPVersionMap": [
+                  {
+                    "clientHTTPProtocol": "HTTP/1.1",
+                    "requests": 4
+                  }
+                ],
+                "contentTypeMap": [
+                  {
+                    "bytes": 3790,
+                    "edgeResponseContentTypeName": "html",
+                    "requests": 4
+                  }
+                ],
+                "countryMap": [
+                  {
+                    "bytes": 3137,
+                    "clientCountryName": "NL",
+                    "requests": 3,
+                    "threats": 0
+                  },
+                  {
+                    "bytes": 653,
+                    "clientCountryName": "US",
+                    "requests": 1,
+                    "threats": 0
+                  }
+                ],
+                "encryptedBytes": 2473,
+                "encryptedRequests": 2,
+                "ipClassMap": [
+                  {
+                    "ipType": "searchEngine",
+                    "requests": 1
+                  },
+                  {
+                    "ipType": "noRecord",
+                    "requests": 3
+                  }
+                ],
+                "pageViews": 0,
+                "requests": 4,
+                "responseStatusMap": [
+                  {
+                    "edgeResponseStatus": 301,
+                    "requests": 3
+                  },
+                  {
+                    "edgeResponseStatus": 404,
+                    "requests": 1
+                  }
+                ],
+                "threatPathingMap": [],
+                "threats": 0
+              },
+              "uniq": {
+                "uniques": 2
+              }
+            },
+            {
+              "dimensions": {
+                "datetime": "2020-02-17T06:00:00Z"
+              },
+              "sum": {
+                "browserMap": [
+                  {
+                    "pageViews": 2,
+                    "uaBrowserFamily": "Chrome"
+                  },
+                  {
+                    "pageViews": 1,
+                    "uaBrowserFamily": "Firefox"
+                  },
+                  {
+                    "pageViews": 3,
+                    "uaBrowserFamily": "Edge"
+                  }
+                ],
+                "bytes": 406019,
+                "cachedBytes": 307767,
+                "cachedRequests": 23,
+                "clientHTTPVersionMap": [
+                  {
+                    "clientHTTPProtocol": "HTTP/1.1",
+                    "requests": 49
+                  }
+                ],
+                "contentTypeMap": [
+                  {
+                    "bytes": 8752,
+                    "edgeResponseContentTypeName": "atom",
+                    "requests": 4
+                  },
+                  {
+                    "bytes": 240460,
+                    "edgeResponseContentTypeName": "js",
+                    "requests": 15
+                  },
+                  {
+                    "bytes": 8424,
+                    "edgeResponseContentTypeName": "rss",
+                    "requests": 4
+                  },
+                  {
+                    "bytes": 125101,
+                    "edgeResponseContentTypeName": "css",
+                    "requests": 14
+                  },
+                  {
+                    "bytes": 23282,
+                    "edgeResponseContentTypeName": "html",
+                    "requests": 12
+                  }
+                ],
+                "countryMap": [
+                  {
+                    "bytes": 400205,
+                    "clientCountryName": "CA",
+                    "requests": 46,
+                    "threats": 0
+                  },
+                  {
+                    "bytes": 5814,
+                    "clientCountryName": "US",
+                    "requests": 3,
+                    "threats": 0
+                  }
+                ],
+                "encryptedBytes": 404025,
+                "encryptedRequests": 46,
+                "ipClassMap": [
+                  {
+                    "ipType": "unknown",
+                    "requests": 46
+                  },
+                  {
+                    "ipType": "monitoringService",
+                    "requests": 3
+                  }
+                ],
+                "pageViews": 6,
+                "requests": 49,
+                "responseStatusMap": [
+                  {
+                    "edgeResponseStatus": 200,
+                    "requests": 43
+                  },
+                  {
+                    "edgeResponseStatus": 301,
+                    "requests": 4
+                  },
+                  {
+                    "edgeResponseStatus": 404,
+                    "requests": 2
+                  }
+                ],
+                "threatPathingMap": [],
+                "threats": 0
+              },
+              "uniq": {
+                "uniques": 2
+              }
+            },
+            {
+              "dimensions": {
+                "datetime": "2020-02-17T05:00:00Z"
+              },
+              "sum": {
+                "browserMap": [
+                  {
+                    "pageViews": 1,
+                    "uaBrowserFamily": "Opera"
+                  }
+                ],
+                "bytes": 13105,
+                "cachedBytes": 0,
+                "cachedRequests": 0,
+                "clientHTTPVersionMap": [
+                  {
+                    "clientHTTPProtocol": "HTTP/1.0",
+                    "requests": 6
+                  }
+                ],
+                "contentTypeMap": [
+                  {
+                    "bytes": 2007,
+                    "edgeResponseContentTypeName": "atom",
+                    "requests": 1
+                  },
+                  {
+                    "bytes": 11098,
+                    "edgeResponseContentTypeName": "html",
+                    "requests": 5
+                  }
+                ],
+                "countryMap": [
+                  {
+                    "bytes": 13105,
+                    "clientCountryName": "KZ",
+                    "requests": 6,
+                    "threats": 0
+                  }
+                ],
+                "encryptedBytes": 12469,
+                "encryptedRequests": 5,
+                "ipClassMap": [
+                  {
+                    "ipType": "noRecord",
+                    "requests": 6
+                  }
+                ],
+                "pageViews": 1,
+                "requests": 6,
+                "responseStatusMap": [
+                  {
+                    "edgeResponseStatus": 200,
+                    "requests": 2
+                  },
+                  {
+                    "edgeResponseStatus": 301,
+                    "requests": 1
+                  },
+                  {
+                    "edgeResponseStatus": 404,
+                    "requests": 3
+                  }
+                ],
+                "threatPathingMap": [],
+                "threats": 0
+              },
+              "uniq": {
+                "uniques": 1
+              }
+            },
+            {
+              "dimensions": {
+                "datetime": "2020-02-17T00:00:00Z"
+              },
+              "sum": {
+                "browserMap": [
+                  {
+                    "pageViews": 1,
+                    "uaBrowserFamily": "Chrome"
+                  }
+                ],
+                "bytes": 19657,
+                "cachedBytes": 0,
+                "cachedRequests": 3,
+                "clientHTTPVersionMap": [
+                  {
+                    "clientHTTPProtocol": "HTTP/1.0",
+                    "requests": 6
+                  },
+                  {
+                    "clientHTTPProtocol": "HTTP/1.1",
+                    "requests": 15
+                  }
+                ],
+                "contentTypeMap": [
+                  {
+                    "bytes": 0,
+                    "edgeResponseContentTypeName": "empty",
+                    "requests": 3
+                  },
+                  {
+                    "bytes": 2007,
+                    "edgeResponseContentTypeName": "atom",
+                    "requests": 1
+                  },
+                  {
+                    "bytes": 17650,
+                    "edgeResponseContentTypeName": "html",
+                    "requests": 17
+                  }
+                ],
+                "countryMap": [
+                  {
+                    "bytes": 2184,
+                    "clientCountryName": "DE",
+                    "requests": 4,
+                    "threats": 0
+                  },
+                  {
+                    "bytes": 13105,
+                    "clientCountryName": "FR",
+                    "requests": 6,
+                    "threats": 0
+                  },
+                  {
+                    "bytes": 4368,
+                    "clientCountryName": "US",
+                    "requests": 11,
+                    "threats": 0
+                  }
+                ],
+                "encryptedBytes": 12469,
+                "encryptedRequests": 5,
+                "ipClassMap": [
+                  {
+                    "ipType": "unknown",
+                    "requests": 15
+                  },
+                  {
+                    "ipType": "noRecord",
+                    "requests": 6
+                  }
+                ],
+                "pageViews": 1,
+                "requests": 21,
+                "responseStatusMap": [
+                  {
+                    "edgeResponseStatus": 200,
+                    "requests": 2
+                  },
+                  {
+                    "edgeResponseStatus": 301,
+                    "requests": 1
+                  },
+                  {
+                    "edgeResponseStatus": 404,
+                    "requests": 15
+                  },
+                  {
+                    "edgeResponseStatus": 499,
+                    "requests": 3
+                  }
+                ],
+                "threatPathingMap": [],
+                "threats": 0
+              },
+              "uniq": {
+                "uniques": 7
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "errors": null
+}

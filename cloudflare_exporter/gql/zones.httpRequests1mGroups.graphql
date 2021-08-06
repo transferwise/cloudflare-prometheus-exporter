@@ -1,0 +1,57 @@
+query httpRequests1mGroups($zoneTag: ZONETAG!, $datetime_gt: DATETIMEGT!, $datetime_lt: DATETIMELT!) {
+  viewer {
+    zones (filter: {zoneTag: $zoneTag}) {
+      httpRequests1mGroups(limit: 5, filter: { datetime_gt: $datetime_gt, datetime_lt: $datetime_lt}) {
+        dimensions {datetime}
+        sum {
+          requests,
+          cachedBytes,
+          cachedRequests,
+          bytes,
+          encryptedBytes,
+          encryptedRequests,
+          pageViews,
+          threats,
+          clientHTTPVersionMap{
+            clientHTTPProtocol,
+            requests
+          }
+          browserMap{
+            pageViews,
+            uaBrowserFamily
+          }
+          clientHTTPVersionMap{
+            clientHTTPProtocol,
+            requests
+          }
+          contentTypeMap{
+            bytes,
+            requests,
+            edgeResponseContentTypeName
+          }
+          countryMap{
+            clientCountryName,
+            requests,
+            threats,
+            bytes
+          }
+          ipClassMap{
+            ipType,
+            requests
+          }
+          threatPathingMap{
+            requests,
+            threatPathingName
+          }
+          responseStatusMap{
+            requests,
+            edgeResponseStatus
+          }
+        }
+        uniq{
+        	uniques
+        }
+      }
+    }
+  }
+}

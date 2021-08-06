@@ -1,0 +1,17 @@
+{
+  "data": null,
+  "errors": [
+    {
+      "extensions": {
+        "code": "authz",
+        "timestamp": "2020-12-21T12:08:44.197654101Z"
+      },
+      "message": "requested zone is not authorized",
+      "path": [
+        "httpRequests1hGroups",
+        "viewer",
+        "zones"
+      ]
+    }
+  ]
+}

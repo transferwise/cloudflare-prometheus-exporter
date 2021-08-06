@@ -1,0 +1,19 @@
+{
+  "data": null,
+  "errors": [
+    {
+      "extensions": {
+        "code": "quota",
+        "timestamp": "2021-01-06T13:51:40.444005044Z"
+      },
+      "message": "query time range is too large for zone adc2ae237a1e542b43cb726eb3c43d42. Time range can't be wider than 54000s, but it's 86400s",
+      "path": [
+        "httpRequests1mGroups",
+        "viewer",
+        "zones",
+        "0",
+        "httpRequests1mGroups"
+      ]
+    }
+  ]
+}
