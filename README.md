@@ -3,7 +3,8 @@
 Prometheus exporter powered by Cloudflare GraphQL API.
 
 <p align="left">
-<a href="https://github.com/transferwise/cloudflare-exporter/actions"><img alt="Actions Status" src="https://github.com/transferwise/cloudflare-exporter/workflows/Build & Test/badge.svg"></a>
+<a href="https://github.com/transferwise/cloudflare-prometheus-exporter/actions"><img alt="Actions Status" src="https://github.com/transferwise/cloudflare-prometheus-exporter/workflows/Build & Test/badge.svg"></a>
+<a href="https://github.com/transferwise/cloudflare-prometheus-exporter/actions"><img alt="Actions Status" src="https://github.com/transferwise/cloudflare-prometheus-exporter/workflows/CodeQL/badge.svg"></a>
 </p>
 
 ## Quickstart
