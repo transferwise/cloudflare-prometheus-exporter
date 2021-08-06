@@ -25,7 +25,7 @@ setup_requirements = ["pytest-runner"]
 test_requirements = ["pytest"]
 
 setup(
-    author="Observability :: TransfewrWise",
+    author="Wise::Observability",
     author_email="observability@transferwise.com",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
@@ -45,12 +45,12 @@ setup(
     long_description=readme + "\n\n" + history,
     include_package_data=True,
     keywords="cloudflare_exporter",
-    name="cloudflare_exporter",
+    name="cloudflare-prometheus-exporter",
     packages=find_packages(include=["cloudflare_exporter", "cloudflare_exporter.gql"]),
     setup_requires=setup_requirements,
     test_suite="tests",
     tests_require=test_requirements,
-    url="https://github.com/p6rguvyrst/cloudflare_exporter",
-    version="0.3.9",
+    url="https://github.com/transferwise/cloudflare-exporter",
+    version="0.3.10",
     zip_safe=False,
 )
