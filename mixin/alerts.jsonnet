@@ -1,3 +1,3 @@
-(
-  import 'mixin.libsonnet'
-).prometheusAlerts
+std.manifestYamlDoc(
+  (import 'mixin.libsonnet').prometheusAlerts
+)

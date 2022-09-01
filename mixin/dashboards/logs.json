@@ -1,0 +1,36 @@
+{
+  "id": 29,
+  "gridPos": {
+    "h": 8,
+    "w": 24,
+    "x": 0,
+    "y": 6
+  },
+  "type": "logs",
+  "title": "Loki logs (limited to 200, for performance.)",
+  "datasource": "$logs",
+  "options": {
+    "showTime": true,
+    "showLabels": false,
+    "showCommonLabels": false,
+    "wrapLogMessage": false,
+    "prettifyLogMessage": false,
+    "enableLogDetails": true,
+    "dedupStrategy": "signature",
+    "sortOrder": "Descending"
+  },
+  "span": 12,
+  "targets": [
+    {
+      "datasource": "$logs",
+      "editorMode": "code",
+      "expr": "{namespace=~\"$namespace\"} | json | line_format \"{{.log}}\" | json | line_format \"{{.zone}} - {{.message}}\"\n",
+      "format": "time_series",
+      "intervalFactor": 2,
+      "legendFormat": "",
+      "maxLines": 200,
+      "queryType": "range",
+      "refId": "A"
+    }
+  ]
+}
