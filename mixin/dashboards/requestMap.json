@@ -1,0 +1,58 @@
+{
+  "id": 24,
+  "gridPos": {
+    "h": 9,
+    "w": 24,
+    "x": 0,
+    "y": 15
+  },
+  "type": "grafana-worldmap-panel",
+  "title": "requests for: [$zone]",
+  "span": 12,
+  "datasource": "$datasource",
+  "thresholds": "1000,10000,100000",
+  "pluginVersion": "7.4.3",
+  "maxDataPoints": 1,
+  "interval": "1m",
+  "circleMaxSize": 30,
+  "circleMinSize": 2,
+  "colors": [
+    "#56A64B",
+    "#F2CC0C",
+    "#FF780A",
+    "#E02F44"
+  ],
+  "esMetric": "Count",
+  "initialZoom": 1,
+  "locationData": "countries",
+  "mapCenter": "(0°, 0°)",
+  "showLegend": true,
+  "tableQueryOptions": {
+    "geohashField": "geohash",
+    "latitudeField": "latitude",
+    "longitudeField": "longitude",
+    "metricField": "metric",
+    "queryType": "geohash"
+  },
+  "targets": [
+    {
+      "datasource": "$datasource",
+      "editorMode": "code",
+      "expr": "sum(cloudflare_requests_detailed{zone=~\"$zone\", namespace=\"$namespace\"}) by (country, zone)",
+      "interval": "",
+      "legendFormat": "{{country}}",
+      "range": true,
+      "refId": "A"
+    }
+  ],
+  "valueName": "total",
+  "decimals": 0,
+  "hideEmpty": false,
+  "hideZero": false,
+  "mapCenterLatitude": 0,
+  "mapCenterLongitude": 0,
+  "mouseWheelZoom": false,
+  "stickyLabels": false,
+  "unitPlural": "",
+  "unitSingle": ""
+}
