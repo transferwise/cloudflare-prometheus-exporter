@@ -1,9 +1,9 @@
 name: Docker Images to DockerHub
-
 on:
-  release:
-    types:
-      - published
+  pull_request:
+  push:
+    branches:
+      - master
 
   workflow_dispatch:
 
@@ -25,6 +25,7 @@ jobs:
 
     - name: Login to DockerHub
       uses: docker/login-action@v1
+      if: ${{ github.ref == 'refs/heads/master' }}
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -32,6 +33,7 @@ jobs:
     - name: Build and push main image
       id: docker_build_main
       uses: docker/build-push-action@v2
+      if: ${{ github.ref == 'refs/heads/master' }}
       with:
         file: ./Dockerfile
         context: .
@@ -41,6 +43,7 @@ jobs:
           transferwiseworkspace/cloudflare-prometheus-exporter:latest
 
     - name: Image digests
+      if: ${{ github.ref == 'refs/heads/master' }}
       run: |
         echo ${{ steps.docker_build_main.outputs.digest }}
         echo ${{ steps.docker_build_barebone.outputs.digest }}
