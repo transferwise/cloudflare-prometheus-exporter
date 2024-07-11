@@ -1,4 +1,4 @@
-FROM python:3.7-slim-stretch
+FROM python:3.12-slim-stretch
 MAINTAINER Transferwise
 
 COPY ./ /app

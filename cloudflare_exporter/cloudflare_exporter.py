@@ -22,10 +22,8 @@ CF_GQL_URL = os.getenv(
     "CLOUDFLARE_GQL_API", "https://api.cloudflare.com/client/v4/graphql"
 )
 CF_HEADERS = {
-    # "X-AUTH-KEY": os.getenv("CLOUDFLARE_TOKEN"),
-    # "X-AUTH-EMAIL": os.getenv("CLOUDFLARE_EMAIL"),
     "content-type": "application/json",
-    "Authorization": os.getenv("CLOUDFLARE_TOKEN"),
+    "Authorization": "Bearer %s" % os.getenv("CLOUDFLARE_TOKEN"),
 }
 CF_ACCOUNT_TAG = os.getenv("CLOUDFLARE_ACCOUNT_TAG")
 EXPORTER_PORT = os.getenv("EXPORTER_PORT", 5000)
@@ -148,7 +146,7 @@ def parse_maps(profile):
 def job(
     gql_api=None, zone=None, zone_id=None, timerange=86400, scrape_shift_seconds=60
 ):
-    LOGGER.debug(gql_api, timerange)
+    # LOGGER.debug(gql_api, timerange)
     # LOGGER.debug(f"Scraping metrics for {gql_api}", extra={"thread": threading.current_thread()})
     query = gql.query.zones.get(gql_api)
     scrape_shift = datetime.timedelta(seconds=scrape_shift_seconds)

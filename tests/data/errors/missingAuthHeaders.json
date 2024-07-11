@@ -1,0 +1,10 @@
+{
+  "@timestamp": "2024-07-08T14:11:20.395287Z",
+  "datetime_gt": "2024-07-08T12:11:20Z",
+  "datetime_lt": "2024-07-08T13:11:20Z",
+  "level": "ERROR",
+  "logger_name": "<Logger cloudflare_exporter.logging (DEBUG)>",
+  "message": "[{'code': 9106, 'message': 'Missing X-Auth-Key, X-Auth-Email or Authorization headers'}]",
+  "taskName": null,
+  "zoneTag": "0efe24d27ad39c1272e5e5207a0c59b8"
+}
