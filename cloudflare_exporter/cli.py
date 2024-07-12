@@ -6,7 +6,7 @@ import yaml
 import click
 import logging
 import logging.config
-from .cloudflare_exporter import run_exporter, run_parallel_exporter
+from .cloudflare_exporter import run_exporter
 
 # logging
 with open("logging.yaml", "r") as f:
@@ -27,17 +27,9 @@ def main(debug):
 @main.command()
 @click.argument("config", type=click.File("rb"))
 def export(config):
-    LOGGER.debug("export mode")
-    config_dict = yaml.load(config, Loader=yaml.FullLoader)
-    run_exporter(config_dict)
-
-
-@main.command()
-@click.argument("config", type=click.File("rb"))
-def parallel(config):
     LOGGER.debug("parallel export mode")
     config_dict = yaml.load(config, Loader=yaml.FullLoader)
-    run_parallel_exporter(config_dict)
+    run_exporter(config_dict)
 
 
 @main.command()
