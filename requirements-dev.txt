@@ -1,6 +1,6 @@
 pip==24.1.2
 bumpversion==0.6.0
-wheel==0.43.0
+wheel==0.44.0
 flake8==7.1.0
 tox==4.16.0
 coverage==7.5.4
