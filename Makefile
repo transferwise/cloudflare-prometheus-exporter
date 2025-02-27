@@ -54,9 +54,13 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
 
-init:
+init: venv
 	pip install -r requirements-dev.txt
 	pre-commit install
+
+venv:
+	python -m venv ./venv
+	source venv/bin/activate
 
 test: ## run tests quickly with the default Python
 	py.test -o log_cli=true -sv --cov=cloudflare_exporter tests/

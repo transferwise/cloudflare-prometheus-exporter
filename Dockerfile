@@ -1,5 +1,5 @@
-FROM python:3.7-slim-stretch
-MAINTAINER Transferwise
+FROM python:3.12-slim
+LABEL "MAINTAINER"="Wise"
 
 COPY ./ /app
 WORKDIR /app
@@ -8,4 +8,4 @@ RUN pip install .
 
 EXPOSE 5000
 
-ENTRYPOINT ["cfexpose", "parallel"]
+ENTRYPOINT ["cfexpose", "export"]

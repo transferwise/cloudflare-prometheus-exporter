@@ -22,10 +22,8 @@ CF_GQL_URL = os.getenv(
     "CLOUDFLARE_GQL_API", "https://api.cloudflare.com/client/v4/graphql"
 )
 CF_HEADERS = {
-    # "X-AUTH-KEY": os.getenv("CLOUDFLARE_TOKEN"),
-    # "X-AUTH-EMAIL": os.getenv("CLOUDFLARE_EMAIL"),
     "content-type": "application/json",
-    "Authorization": os.getenv("CLOUDFLARE_TOKEN"),
+    "Authorization": "Bearer %s" % os.getenv("CLOUDFLARE_TOKEN"),
 }
 CF_ACCOUNT_TAG = os.getenv("CLOUDFLARE_ACCOUNT_TAG")
 EXPORTER_PORT = os.getenv("EXPORTER_PORT", 5000)
@@ -148,7 +146,7 @@ def parse_maps(profile):
 def job(
     gql_api=None, zone=None, zone_id=None, timerange=86400, scrape_shift_seconds=60
 ):
-    LOGGER.debug(gql_api, timerange)
+    # LOGGER.debug(gql_api, timerange)
     # LOGGER.debug(f"Scraping metrics for {gql_api}", extra={"thread": threading.current_thread()})
     query = gql.query.zones.get(gql_api)
     scrape_shift = datetime.timedelta(seconds=scrape_shift_seconds)
@@ -189,7 +187,7 @@ def run_threaded(job_func, **kwargs):
     job_thread.start()
 
 
-def run_parallel_exporter(config):
+def run_exporter(config):
 
     #  https://schedule.readthedocs.io/en/stable/faq.html#how-to-execute-jobs-in-parallel
     prometheus_client.start_http_server(int(EXPORTER_PORT))
@@ -232,51 +230,3 @@ def run_parallel_exporter(config):
     while True:
         schedule.run_pending()
         time.sleep(1)
-
-
-def run_exporter(config):
-    exporter = CloudflareExporter()
-    prometheus_client.start_http_server(int(EXPORTER_PORT))
-
-    monitored_zones = config["zones"]
-    query_key = config.get("api", "httpRequests1hGroups")
-    query = gql.query.zones.get(query_key)
-
-    timerange = config.get("timerangeSeconds", int(86400))
-
-    # Initialise internal metrics
-    for zone in monitored_zones.keys():
-        INTERNAL_MONITOR._metric_collection_errors.labels(zone, timerange).inc(0)
-
-    # Which API Zone VS Account
-    while True:
-        # what about time zones
-        timerange_end = datetime.datetime.utcnow()
-        timerange_start = timerange_end - datetime.timedelta(seconds=timerange)
-        DATETIME_LT = timerange_end.strftime("%Y-%m-%dT%H:%M:%SZ")
-        DATETIME_GT = timerange_start.strftime("%Y-%m-%dT%H:%M:%SZ")
-        for zone, zone_id in monitored_zones.items():
-            variables = {
-                # "accountTag": CF_ACCOUNT_TAG,
-                "zoneTag": zone_id,
-                "datetime_gt": DATETIME_GT,
-                "datetime_lt": DATETIME_LT,
-            }
-
-            LOGGER.debug("Calling cloudflare with variables", extra=variables)
-            raw_data = exporter.get_metrics(
-                query, variables
-            ).json()  # What if, when it's not json.
-            metrics = parser_httpRequests1hGroups(
-                raw_data,
-                endpoint="zones",
-                zone=zone,
-                query_key=query_key,
-                timerange=timerange,
-            )
-            if metrics:
-                exporter.set_metric_values(metrics, zone, timerange)
-            else:
-                LOGGER.info("No metrics for given variables.", extra=variables)
-
-        time.sleep(int(config.get("scrape_interval", 21600)))

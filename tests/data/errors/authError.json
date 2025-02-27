@@ -1,0 +1,10 @@
+{
+  "@timestamp": "2024-07-08T14:41:08.112838Z",
+  "datetime_gt": "2024-07-08T12:41:07Z",
+  "datetime_lt": "2024-07-08T13:41:07Z",
+  "level": "ERROR",
+  "logger_name": "<Logger cloudflare_exporter.logging (DEBUG)>",
+  "message": "[{'code': 10000, 'message': 'Authentication error'}]",
+  "taskName": null,
+  "zoneTag": "0efe24d27ad39c1272e5e5207a0c59b8"
+}
