@@ -1,5 +1,5 @@
 FROM python:3.12-slim
-MAINTAINER Wise
+LABEL "MAINTAINER"="Wise"
 
 COPY ./ /app
 WORKDIR /app
