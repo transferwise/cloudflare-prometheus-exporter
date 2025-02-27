@@ -1,4 +1,4 @@
-FROM python:3.12-slim-stretch
+FROM python:3.12-slim
 MAINTAINER Wise
 
 COPY ./ /app
