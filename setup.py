@@ -28,7 +28,7 @@ setup(
     author="Wise::Observability",
     author_email="observability@transferwise.com",
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: Apache Software License",
         "Natural Language :: English",
@@ -50,6 +50,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/transferwise/cloudflare-exporter",
-    version="0.4.0",
+    version="0.4.1",
     zip_safe=False,
 )
