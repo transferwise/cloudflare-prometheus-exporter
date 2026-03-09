@@ -1,0 +1,74 @@
+{
+  "data": {
+    "viewer": {
+      "zones": [
+        {
+          "httpRequests1hGroups": [
+            {
+              "sum": {
+                "requests": 100,
+                "bytes": 1000,
+                "cachedBytes": 500,
+                "cachedRequests": 50,
+                "encryptedBytes": 800,
+                "encryptedRequests": 80,
+                "pageViews": 20,
+                "threats": 2,
+                "clientHTTPVersionMap": [],
+                "responseStatusMap": [
+                  {
+                    "edgeResponseStatus": 200,
+                    "requests": 100
+                  }
+                ],
+                "threatPathingMap": [],
+                "contentTypeMap": [],
+                "ipClassMap": [],
+                "countryMap": [
+                  {
+                    "clientCountryName": "US",
+                    "bytes": 1000,
+                    "requests": 100,
+                    "threats": 2
+                  }
+                ],
+                "browserMap": []
+              }
+            },
+            {
+              "sum": {
+                "requests": 200,
+                "bytes": 2000,
+                "cachedBytes": 1000,
+                "cachedRequests": 100,
+                "encryptedBytes": 1600,
+                "encryptedRequests": 160,
+                "pageViews": 40,
+                "threats": 4,
+                "clientHTTPVersionMap": [],
+                "responseStatusMap": [
+                  {
+                    "edgeResponseStatus": 200,
+                    "requests": 200
+                  }
+                ],
+                "threatPathingMap": [],
+                "contentTypeMap": [],
+                "ipClassMap": [],
+                "countryMap": [
+                  {
+                    "clientCountryName": "US",
+                    "bytes": 2000,
+                    "requests": 200,
+                    "threats": 4
+                  }
+                ],
+                "browserMap": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

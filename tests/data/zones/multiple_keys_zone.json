@@ -1,0 +1,44 @@
+{
+  "data": {
+    "viewer": {
+      "zones": [
+        {
+          "httpRequests1hGroups": [
+            {
+              "sum": {
+                "requests": 100,
+                "bytes": 1000,
+                "cachedBytes": 500,
+                "cachedRequests": 50,
+                "encryptedBytes": 800,
+                "encryptedRequests": 80,
+                "pageViews": 20,
+                "threats": 2,
+                "clientHTTPVersionMap": [],
+                "responseStatusMap": [
+                  {
+                    "edgeResponseStatus": 200,
+                    "requests": 100
+                  }
+                ],
+                "threatPathingMap": [],
+                "contentTypeMap": [],
+                "ipClassMap": [],
+                "countryMap": [
+                  {
+                    "clientCountryName": "US",
+                    "bytes": 1000,
+                    "requests": 100,
+                    "threats": 2
+                  }
+                ],
+                "browserMap": []
+              }
+            }
+          ],
+          "extraKey": "This causes len(data) > 1"
+        }
+      ]
+    }
+  }
+}

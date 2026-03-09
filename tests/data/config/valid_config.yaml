@@ -1,0 +1,6 @@
+zones:
+  example.com:
+    zone_id: abc123
+    api: httpRequests1hGroups
+    timerange_seconds: 86400
+    scrape_interval_seconds: 86400
