@@ -77,7 +77,12 @@ class TestRunExporter:
     def test_run_exporter_with_custom_api_endpoint(
         self, mock_time, mock_prometheus, mock_schedule
     ):
-        """Test run_exporter with custom API endpoint."""
+        """Test run_exporter with custom API endpoint.
+
+        Verifies that custom API endpoint is used (for query selection),
+        and that scheduling still uses the default scrape_interval_seconds since
+        no custom value is provided.
+        """
         config = {
             "api": "httpRequests1mGroups",
             "zones": {
@@ -94,7 +99,10 @@ class TestRunExporter:
         except KeyboardInterrupt:
             pass
 
-        mock_schedule.every.assert_called()
+        # Verify schedule.every uses default interval since no custom scrape_interval_seconds
+        expected_interval = 86400  # Default from cloudflare_exporter.py
+        mock_schedule.every.assert_called_once_with(expected_interval)
+        mock_every.seconds.do.assert_called_once()
 
     @patch("cloudflare_exporter.cloudflare_exporter.schedule")
     @patch("cloudflare_exporter.cloudflare_exporter.prometheus_client")
@@ -102,7 +110,12 @@ class TestRunExporter:
     def test_run_exporter_with_custom_timerange(
         self, mock_time, mock_prometheus, mock_schedule
     ):
-        """Test run_exporter with custom timerange."""
+        """Test run_exporter with custom timerange.
+
+        Verifies that custom timerange_seconds is used (for metrics collection),
+        and that scheduling still uses the default scrape_interval_seconds since
+        no custom value is provided.
+        """
         config = {
             "timerange_seconds": 3600,
             "zones": {
@@ -119,7 +132,10 @@ class TestRunExporter:
         except KeyboardInterrupt:
             pass
 
-        mock_schedule.every.assert_called()
+        # Verify schedule.every uses default interval since no custom scrape_interval_seconds
+        expected_interval = 86400  # Default from cloudflare_exporter.py
+        mock_schedule.every.assert_called_once_with(expected_interval)
+        mock_every.seconds.do.assert_called_once()
 
     @patch("cloudflare_exporter.cloudflare_exporter.schedule")
     @patch("cloudflare_exporter.cloudflare_exporter.prometheus_client")
@@ -127,7 +143,11 @@ class TestRunExporter:
     def test_run_exporter_with_custom_scrape_interval(
         self, mock_time, mock_prometheus, mock_schedule
     ):
-        """Test run_exporter with custom scrape interval."""
+        """Test run_exporter uses the configured scrape interval for scheduling.
+
+        Verifies that schedule.every() is called with the custom scrape_interval_seconds
+        value from the config, not the default.
+        """
         config = {
             "scrape_interval_seconds": 1800,
             "zones": {
@@ -144,7 +164,10 @@ class TestRunExporter:
         except KeyboardInterrupt:
             pass
 
-        mock_schedule.every.assert_called()
+        # Verify schedule.every was called with the custom interval from config
+        expected_interval = config["scrape_interval_seconds"]
+        mock_schedule.every.assert_called_once_with(expected_interval)
+        mock_every.seconds.do.assert_called_once()
 
     @patch("cloudflare_exporter.cloudflare_exporter.schedule")
     @patch("cloudflare_exporter.cloudflare_exporter.prometheus_client")
@@ -152,7 +175,12 @@ class TestRunExporter:
     def test_run_exporter_with_custom_scrape_shift(
         self, mock_time, mock_prometheus, mock_schedule
     ):
-        """Test run_exporter with custom scrape shift."""
+        """Test run_exporter with custom scrape shift.
+
+        Verifies that custom scrape_shift_seconds is used (for time offset),
+        and that scheduling still uses the default scrape_interval_seconds since
+        no custom value is provided.
+        """
         config = {
             "scrape_shift_seconds": 120,
             "zones": {
@@ -169,7 +197,10 @@ class TestRunExporter:
         except KeyboardInterrupt:
             pass
 
-        mock_schedule.every.assert_called()
+        # Verify schedule.every uses default interval since no custom scrape_interval_seconds
+        expected_interval = 86400  # Default from cloudflare_exporter.py
+        mock_schedule.every.assert_called_once_with(expected_interval)
+        mock_every.seconds.do.assert_called_once()
 
     @patch("cloudflare_exporter.cloudflare_exporter.schedule")
     @patch("cloudflare_exporter.cloudflare_exporter.prometheus_client")
@@ -177,7 +208,11 @@ class TestRunExporter:
     def test_run_exporter_with_zone_specific_overrides(
         self, mock_time, mock_prometheus, mock_schedule
     ):
-        """Test run_exporter with zone-specific configuration overrides."""
+        """Test run_exporter applies zone-specific configuration overrides.
+
+        Verifies that zone-specific scrape_interval_seconds overrides the global
+        default and is correctly passed to schedule.every().
+        """
         config = {
             "api": "httpRequests1hGroups",
             "timerange_seconds": 86400,
@@ -201,8 +236,11 @@ class TestRunExporter:
         except KeyboardInterrupt:
             pass
 
-        # Verify schedule was called with zone-specific interval
-        mock_every.seconds.do.assert_called()
+        # Verify schedule.every was called with zone-specific interval from config
+        zone_config = config["zones"]["example.com"]
+        expected_interval = zone_config["scrape_interval_seconds"]
+        mock_schedule.every.assert_called_once_with(expected_interval)
+        mock_every.seconds.do.assert_called_once()
 
     @patch("cloudflare_exporter.cloudflare_exporter.schedule")
     @patch("cloudflare_exporter.cloudflare_exporter.prometheus_client")

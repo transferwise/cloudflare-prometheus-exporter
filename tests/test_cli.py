@@ -291,7 +291,11 @@ class TestEdgeCases:
             Path(config_file_path).unlink()
 
     def test_export_with_empty_file(self):
-        """Test export command with empty configuration file."""
+        """Test export command with empty configuration file.
+
+        Empty YAML files parse as None, which causes run_exporter to fail
+        when trying to access config["zones"].
+        """
         from cloudflare_exporter.cli import main
 
         runner = CliRunner()
@@ -303,12 +307,12 @@ class TestEdgeCases:
             config_file_path = config_file.name
 
         try:
-            with patch("cloudflare_exporter.cli.run_exporter") as mock_run_exporter:
-                result = runner.invoke(main, ["export", config_file_path])
+            result = runner.invoke(main, ["export", config_file_path])
 
-                # Empty file should result in None config
-                if mock_run_exporter.called:
-                    called_config = mock_run_exporter.call_args[0][0]
-                    assert called_config is None or called_config == {}
+            # Empty file parses as None, causing TypeError in run_exporter
+            assert result.exit_code != 0
+            assert result.exception is not None
+            # Verify the error is due to None config
+            assert "NoneType" in str(result.exception)
         finally:
             Path(config_file_path).unlink()

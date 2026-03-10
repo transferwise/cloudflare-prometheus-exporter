@@ -183,7 +183,7 @@ def job(
 
 
 def run_threaded(job_func, **kwargs):
-    job_thread = threading.Thread(target=job_func(**kwargs))
+    job_thread = threading.Thread(target=job_func, kwargs=kwargs)
     job_thread.start()
 
 
@@ -196,7 +196,7 @@ def run_exporter(config):
     # Sane default values to work with free tier
     query_key = config.get("api", "httpRequests1hGroups")
     timerange_seconds = config.get("timerange_seconds", int(86400))
-    scrape_interval_seconds = config.get("scrape_interval_secondss", int(86400))
+    scrape_interval_seconds = config.get("scrape_interval_seconds", int(86400))
     scrape_shift_seconds = config.get("scrape_shift_seconds", int(60))
 
     for zone, settings in monitored_zones.items():

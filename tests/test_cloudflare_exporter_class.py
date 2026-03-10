@@ -308,19 +308,33 @@ class TestRunThreaded:
 
     @patch("cloudflare_exporter.cloudflare_exporter.threading.Thread")
     def test_run_threaded_starts_thread(self, mock_thread):
-        """Test that run_threaded starts a new thread."""
+        """Test that run_threaded starts a new thread with correct parameters.
+
+        Verifies that:
+        1. Thread receives the job function as target (not its return value)
+        2. Thread receives kwargs via kwargs parameter
+        3. Job function is not executed on the calling thread
+        """
         mock_job = Mock(return_value=None)
         mock_thread_instance = Mock()
         mock_thread.return_value = mock_thread_instance
 
         run_threaded(mock_job, test_kwarg="value")
 
-        mock_thread.assert_called_once()
+        # Verify Thread was called with the function reference, not its result
+        mock_thread.assert_called_once_with(
+            target=mock_job,
+            kwargs={"test_kwarg": "value"}
+        )
         mock_thread_instance.start.assert_called_once()
+
+        # Verify the job was NOT executed on the calling thread
+        # (it should only run when the thread starts)
+        mock_job.assert_not_called()
 
     @patch("cloudflare_exporter.cloudflare_exporter.threading.Thread")
     def test_run_threaded_with_multiple_kwargs(self, mock_thread):
-        """Test run_threaded with multiple keyword arguments."""
+        """Test run_threaded passes multiple kwargs correctly to Thread."""
         mock_job = Mock(return_value=None)
         mock_thread_instance = Mock()
         mock_thread.return_value = mock_thread_instance
@@ -329,5 +343,12 @@ class TestRunThreaded:
             mock_job, zone="example.com", zone_id="test-id", timerange=3600
         )
 
-        mock_thread.assert_called_once()
+        # Verify Thread receives all kwargs
+        mock_thread.assert_called_once_with(
+            target=mock_job,
+            kwargs={"zone": "example.com", "zone_id": "test-id", "timerange": 3600}
+        )
         mock_thread_instance.start.assert_called_once()
+
+        # Verify job not executed eagerly
+        mock_job.assert_not_called()
