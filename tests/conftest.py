@@ -54,3 +54,52 @@ def sample_config():
     """Sample configuration for CLI testing."""
     with open("tests/data/config/valid_config.yaml") as data:
         return yaml.safe_load(data)
+
+
+@pytest.fixture(scope="session")
+def successful_response_data():
+    """Successful API response with metrics data."""
+    with open("tests/data/zones/successful_response.json") as data:
+        return json.load(data)
+
+
+@pytest.fixture(scope="session")
+def empty_metrics_data():
+    """API response with empty metrics."""
+    with open("tests/data/zones/empty_metrics.json") as data:
+        return json.load(data)
+
+
+@pytest.fixture(scope="session")
+def not_authorized_error():
+    """Not authorized error response."""
+    with open("tests/data/errors/notAuthorized.json") as data:
+        return json.load(data)
+
+
+@pytest.fixture(scope="session")
+def basic_metrics():
+    """Basic metrics data for set_metric_values testing."""
+    with open("tests/data/metrics/basic_metrics.json") as data:
+        return json.load(data)
+
+
+@pytest.fixture(scope="session")
+def multiple_countries_metrics():
+    """Metrics with multiple countries."""
+    with open("tests/data/metrics/multiple_countries.json") as data:
+        return json.load(data)
+
+
+@pytest.fixture(scope="session")
+def multiple_status_codes_metrics():
+    """Metrics with multiple HTTP status codes."""
+    with open("tests/data/metrics/multiple_status_codes.json") as data:
+        return json.load(data)
+
+
+@pytest.fixture(scope="session")
+def empty_maps_metrics():
+    """Metrics with empty country and status maps."""
+    with open("tests/data/metrics/empty_maps.json") as data:
+        return json.load(data)

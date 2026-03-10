@@ -64,27 +64,13 @@ class TestCloudflareExporter:
             assert result.status_code == status_code
 
     @patch("cloudflare_exporter.cloudflare_exporter.MONITOR")
-    def test_set_metric_values_basic(self, mock_monitor):
+    def test_set_metric_values_basic(self, mock_monitor, basic_metrics):
         """Test set_metric_values with basic metrics."""
         exporter = CloudflareExporter()
-        metrics = {
-            "requests": 100,
-            "cachedBytes": 1000,
-            "cachedRequests": 50,
-            "bytes": 2000,
-            "encryptedBytes": 1500,
-            "encryptedRequests": 75,
-            "pageViews": 20,
-            "threats": 5,
-            "countryMap": {
-                "US": {"requests": 100, "bytes": 2000, "threats": 5}
-            },
-            "responseStatusMap": {200: 100, 404: 10},
-        }
         zone = "example.com"
         timerange = 3600
 
-        exporter.set_metric_values(metrics, zone, timerange)
+        exporter.set_metric_values(basic_metrics, zone, timerange)
 
         # Verify all gauge metrics were set
         mock_monitor._requests.labels.assert_called_with(zone, timerange)
@@ -92,29 +78,15 @@ class TestCloudflareExporter:
         mock_monitor._bytes.labels.assert_called_with(zone, timerange)
 
     @patch("cloudflare_exporter.cloudflare_exporter.MONITOR")
-    def test_set_metric_values_with_multiple_countries(self, mock_monitor):
+    def test_set_metric_values_with_multiple_countries(
+        self, mock_monitor, multiple_countries_metrics
+    ):
         """Test set_metric_values with multiple countries."""
         exporter = CloudflareExporter()
-        metrics = {
-            "requests": 100,
-            "cachedBytes": 1000,
-            "cachedRequests": 50,
-            "bytes": 2000,
-            "encryptedBytes": 1500,
-            "encryptedRequests": 75,
-            "pageViews": 20,
-            "threats": 5,
-            "countryMap": {
-                "US": {"requests": 50, "bytes": 1000, "threats": 2},
-                "UK": {"requests": 30, "bytes": 600, "threats": 1},
-                "DE": {"requests": 20, "bytes": 400, "threats": 2},
-            },
-            "responseStatusMap": {200: 100},
-        }
         zone = "example.com"
         timerange = 3600
 
-        exporter.set_metric_values(metrics, zone, timerange)
+        exporter.set_metric_values(multiple_countries_metrics, zone, timerange)
 
         # Verify country metrics were set for all countries
         assert mock_monitor._requests_new.labels.call_count == 3
@@ -122,49 +94,27 @@ class TestCloudflareExporter:
         assert mock_monitor._threats_new.labels.call_count == 3
 
     @patch("cloudflare_exporter.cloudflare_exporter.MONITOR")
-    def test_set_metric_values_with_multiple_status_codes(self, mock_monitor):
+    def test_set_metric_values_with_multiple_status_codes(
+        self, mock_monitor, multiple_status_codes_metrics
+    ):
         """Test set_metric_values with multiple status codes."""
         exporter = CloudflareExporter()
-        metrics = {
-            "requests": 100,
-            "cachedBytes": 1000,
-            "cachedRequests": 50,
-            "bytes": 2000,
-            "encryptedBytes": 1500,
-            "encryptedRequests": 75,
-            "pageViews": 20,
-            "threats": 5,
-            "countryMap": {},
-            "responseStatusMap": {200: 80, 404: 10, 500: 5, 502: 3, 503: 2},
-        }
         zone = "example.com"
         timerange = 3600
 
-        exporter.set_metric_values(metrics, zone, timerange)
+        exporter.set_metric_values(multiple_status_codes_metrics, zone, timerange)
 
         # Verify status code metrics were set for all codes
         assert mock_monitor._responseCodes.labels.call_count == 5
 
     @patch("cloudflare_exporter.cloudflare_exporter.MONITOR")
-    def test_set_metric_values_with_empty_maps(self, mock_monitor):
+    def test_set_metric_values_with_empty_maps(self, mock_monitor, empty_maps_metrics):
         """Test set_metric_values with empty country and status maps."""
         exporter = CloudflareExporter()
-        metrics = {
-            "requests": 100,
-            "cachedBytes": 1000,
-            "cachedRequests": 50,
-            "bytes": 2000,
-            "encryptedBytes": 1500,
-            "encryptedRequests": 75,
-            "pageViews": 20,
-            "threats": 5,
-            "countryMap": {},
-            "responseStatusMap": {},
-        }
         zone = "example.com"
         timerange = 3600
 
-        exporter.set_metric_values(metrics, zone, timerange)
+        exporter.set_metric_values(empty_maps_metrics, zone, timerange)
 
         # Verify basic metrics were still set
         mock_monitor._requests.labels.assert_called_with(zone, timerange)
@@ -176,50 +126,13 @@ class TestJobFunction:
     @patch("cloudflare_exporter.cloudflare_exporter.EXPORTER")
     @patch("cloudflare_exporter.cloudflare_exporter.gql")
     @patch("cloudflare_exporter.cloudflare_exporter.LOGGER")
-    def test_job_successful_execution(self, mock_logger, mock_gql, mock_exporter):
+    def test_job_successful_execution(
+        self, mock_logger, mock_gql, mock_exporter, successful_response_data
+    ):
         """Test job function with successful execution."""
         mock_gql.query.zones.get.return_value = "test query"
         mock_response = Mock()
-        mock_response.json.return_value = {
-            "data": {
-                "viewer": {
-                    "zones": [
-                        {
-                            "httpRequests1hGroups": [
-                                {
-                                    "sum": {
-                                        "requests": 100,
-                                        "bytes": 1000,
-                                        "cachedBytes": 500,
-                                        "cachedRequests": 50,
-                                        "encryptedBytes": 800,
-                                        "encryptedRequests": 80,
-                                        "pageViews": 20,
-                                        "threats": 2,
-                                        "clientHTTPVersionMap": [],
-                                        "responseStatusMap": [
-                                            {"edgeResponseStatus": 200, "requests": 100}
-                                        ],
-                                        "threatPathingMap": [],
-                                        "contentTypeMap": [],
-                                        "ipClassMap": [],
-                                        "countryMap": [
-                                            {
-                                                "clientCountryName": "US",
-                                                "bytes": 1000,
-                                                "requests": 100,
-                                                "threats": 2,
-                                            }
-                                        ],
-                                        "browserMap": [],
-                                    }
-                                }
-                            ]
-                        }
-                    ]
-                }
-            }
-        }
+        mock_response.json.return_value = successful_response_data
         mock_exporter.get_metrics.return_value = mock_response
 
         job(
@@ -236,14 +149,13 @@ class TestJobFunction:
     @patch("cloudflare_exporter.cloudflare_exporter.EXPORTER")
     @patch("cloudflare_exporter.cloudflare_exporter.gql")
     @patch("cloudflare_exporter.cloudflare_exporter.LOGGER")
-    def test_job_with_api_errors(self, mock_logger, mock_gql, mock_exporter):
+    def test_job_with_api_errors(
+        self, mock_logger, mock_gql, mock_exporter, not_authorized_error
+    ):
         """Test job function with API errors."""
         mock_gql.query.zones.get.return_value = "test query"
         mock_response = Mock()
-        mock_response.json.return_value = {
-            "errors": [{"message": "not authorized"}],
-            "data": None,
-        }
+        mock_response.json.return_value = not_authorized_error
         mock_exporter.get_metrics.return_value = mock_response
 
         job(
@@ -258,13 +170,13 @@ class TestJobFunction:
     @patch("cloudflare_exporter.cloudflare_exporter.EXPORTER")
     @patch("cloudflare_exporter.cloudflare_exporter.gql")
     @patch("cloudflare_exporter.cloudflare_exporter.LOGGER")
-    def test_job_with_no_metrics(self, mock_logger, mock_gql, mock_exporter):
+    def test_job_with_no_metrics(
+        self, mock_logger, mock_gql, mock_exporter, empty_metrics_data
+    ):
         """Test job function when no metrics are returned."""
         mock_gql.query.zones.get.return_value = "test query"
         mock_response = Mock()
-        mock_response.json.return_value = {
-            "data": {"viewer": {"zones": [{"httpRequests1hGroups": []}]}}
-        }
+        mock_response.json.return_value = empty_metrics_data
         mock_exporter.get_metrics.return_value = mock_response
 
         job(
@@ -278,13 +190,13 @@ class TestJobFunction:
 
     @patch("cloudflare_exporter.cloudflare_exporter.EXPORTER")
     @patch("cloudflare_exporter.cloudflare_exporter.gql")
-    def test_job_with_custom_timerange(self, mock_gql, mock_exporter):
+    def test_job_with_custom_timerange(
+        self, mock_gql, mock_exporter, empty_metrics_data
+    ):
         """Test job function with custom timerange."""
         mock_gql.query.zones.get.return_value = "test query"
         mock_response = Mock()
-        mock_response.json.return_value = {
-            "data": {"viewer": {"zones": [{"httpRequests1hGroups": []}]}}
-        }
+        mock_response.json.return_value = empty_metrics_data
         mock_exporter.get_metrics.return_value = mock_response
 
         job(
@@ -323,8 +235,7 @@ class TestRunThreaded:
 
         # Verify Thread was called with the function reference, not its result
         mock_thread.assert_called_once_with(
-            target=mock_job,
-            kwargs={"test_kwarg": "value"}
+            target=mock_job, kwargs={"test_kwarg": "value"}
         )
         mock_thread_instance.start.assert_called_once()
 
@@ -339,14 +250,12 @@ class TestRunThreaded:
         mock_thread_instance = Mock()
         mock_thread.return_value = mock_thread_instance
 
-        run_threaded(
-            mock_job, zone="example.com", zone_id="test-id", timerange=3600
-        )
+        run_threaded(mock_job, zone="example.com", zone_id="test-id", timerange=3600)
 
         # Verify Thread receives all kwargs
         mock_thread.assert_called_once_with(
             target=mock_job,
-            kwargs={"zone": "example.com", "zone_id": "test-id", "timerange": 3600}
+            kwargs={"zone": "example.com", "zone_id": "test-id", "timerange": 3600},
         )
         mock_thread_instance.start.assert_called_once()
 

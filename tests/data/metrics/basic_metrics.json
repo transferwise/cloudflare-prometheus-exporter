@@ -1,0 +1,21 @@
+{
+  "requests": 100,
+  "cachedBytes": 1000,
+  "cachedRequests": 50,
+  "bytes": 2000,
+  "encryptedBytes": 1500,
+  "encryptedRequests": 75,
+  "pageViews": 20,
+  "threats": 5,
+  "countryMap": {
+    "US": {
+      "requests": 100,
+      "bytes": 2000,
+      "threats": 5
+    }
+  },
+  "responseStatusMap": {
+    "200": 100,
+    "404": 10
+  }
+}
