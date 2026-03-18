@@ -63,7 +63,10 @@ venv:
 	source venv/bin/activate
 
 test: ## run tests quickly with the default Python
-	py.test -o log_cli=true -sv --cov=cloudflare_exporter tests/
+	py.test -o log_cli=true -sv --cov=cloudflare_exporter --cov-report=xml tests/
+
+coverage: ## generate HTML coverage report
+	py.test --cov=cloudflare_exporter --cov-report=html tests/
 
 install: clean ## install the package to the active Python's site-packages
 	python setup.py install
