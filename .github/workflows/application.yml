@@ -38,3 +38,58 @@ jobs:
         run: |
           . venv/bin/activate
           make test
+
+      - name: Save coverage report
+        if: matrix.python-version == 3.12
+        uses: actions/cache/save@v4
+        with:
+          path: coverage.xml
+          key: ${{ github.sha }}-coverage
+
+  sonarqube-analysis:
+    name: "Sonarqube Analysis"
+    needs:
+      - build
+    runs-on: gha-production-medium
+    container: ci-images-release.arti.tw.ee/actions_sonar4
+    if: ${{ github.ref == 'refs/heads/master' }}
+
+    env:
+      SONARQUBE_HOST: ${{ vars.SONARQUBE_URL }}
+      SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Retrieve coverage
+        uses: actions/cache/restore@v4
+        with:
+          path: coverage.xml
+          key: "${{ github.sha }}-coverage"
+          fail-on-cache-miss: true
+      - name: "Determine Branch"
+        id: branch
+        uses: transferwise/sanitize-branch-name@v1
+
+      - name: Run SonarQube Analysis
+        shell: bash
+        run: |
+          PR=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          BRANCH=${{ steps.branch.outputs.branch-name }}
+          PROJECT_KEY="cloudflare-prometheus-exporter"
+          if [ "$BRANCH" != 'master' ] && [ "$PR" != "null" ]; then
+             export SONAR_PR_PARAMS=" \
+              -Dsonar.pullrequest.key=$PR \
+              -Dsonar.pullrequest.branch=$BRANCH \
+              -Dsonar.pullrequest.base=master";
+          fi
+          export PATH=$PATH:/opt/sonar/bin
+          sonar-scanner -X \
+            -Dsonar.projectKey="$PROJECT_KEY" \
+            -Dsonar.projectName="$PROJECT_KEY" \
+            -Dsonar.host.url="$SONARQUBE_HOST" \
+            -Dsonar.login="$SONARQUBE_TOKEN" \
+            -Dsonar.python.coverage.reportPaths=coverage.xml \
+            ${SONAR_PR_PARAMS}
