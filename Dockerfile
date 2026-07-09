@@ -7,8 +7,7 @@ WORKDIR /app
 # tw-base-python runs as non-root (UID 65534). pip install writes into
 # system site-packages, which requires root, so switch to root for the install.
 USER 0
-RUN pip install .
-RUN chown -R 65534 /app
+RUN pip install . && chown -R 65534:65534 /app
 
 EXPOSE 5000
 
