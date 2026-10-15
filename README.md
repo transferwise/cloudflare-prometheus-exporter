@@ -21,6 +21,24 @@ Examples:
 ![Grafana 1](static/images/dashboard_1.png?raw=true "Grafana 1")
 ![Grafana 2](static/images/dashboard_2.png?raw=true "Grafana 2")
 
+## Test Coverage
+
+To generate a test coverage report, run:
+
+```
+make coverage
+```
+
+This will create an HTML coverage report in the `htmlcov/` directory. Open `htmlcov/index.html` in your browser to view the interactive report.
+
+To generate an XML coverage report (used in CI), run:
+
+```
+make test
+```
+
+This produces a `coverage.xml` file in the project root.
+
 # Configuration options
 
 Required environment variables:
